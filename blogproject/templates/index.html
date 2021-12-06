@@ -1,0 +1,30 @@
+{% extends 'basic.html' %}
+
+{% block content %}
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    {% if current_user.is_authenticated %}
+    <h1 class="display-4">Hey, {{ current_user.username }} !</h1>
+    {% else %}
+    <h1 class="display-4">Hey, there !</h1>
+    {% endif %}
+    
+    <p class="lead">Welcome to STARK INDUSTRIES BLOG !! </p>
+  </div>
+</div>
+{% for b in blogs %}
+
+<div class="card">
+  <div class="card-header">
+    {{b.title}}
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{ b.text }}</h5>
+    <p class="card-text">Time: {{ b.date.strftime('%Y-%m-%d') }}</p>
+    <p class="card-text">Author: {{ b.User.username }}</p>
+    <a href="{{ url_for('blog.displaypost', blog_post_id=b.id) }}" class="btn btn-primary">Visit the Blog</a>
+  </div>
+</div>
+  
+{% endfor %}
+{% endblock content %}

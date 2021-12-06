@@ -1,0 +1,31 @@
+{% extends 'basic.html' %}
+
+{% block content %}
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+   
+      <h1 class="display-4">{{ blog.title | upper }}</h1>
+      <h3>Time: {{ blog.date.strftime('%Y-%m-%d') }}</h3>
+      <h3>Author: {{ blog.User.username }} </h3>
+     <br>
+     <br>
+     <p class="lead">{{ blog.text }}</p>
+        <br>
+        <br>
+        {% if current_user.id==blog.User.id %}
+        <a href="{{ url_for('blog.deletepost', blog_post_id=blog.id) }}"><button type="button"  class="btn btn-outline-danger">Delete</button></a>
+     <a href="{{ url_for('blog.updatepost', blog_post_id=blog.id) }}"><button type="button"  class="btn btn-outline-info">Update</button></a>
+      
+            
+        {% else %}
+            
+        {% endif %}
+     
+    </div>
+  </div>
+   
+    
+
+
+{% endblock content %}
